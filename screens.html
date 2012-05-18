@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  iframe {
+    overflow: hidden;
+    border: none;
+  }
+
+  .border {
+    border: solid black 5px;
+    border-radius: 5px;
+    box-shadow: 10px 10px 10px #ccc;
+    margin: 50px;
+  }
+
+</style>
+<script>
+var screenData = [
+  { name: 'Apple iPod', width:320, height:240,  dpi:163 },
+  { name: 'Apple iPhone', width:320, height:480,  dpi:163 },
+  { name: 'Apple iPhone 4s', width:640, height:960,  dpi:326 },
+  { name: 'Apple iPad', width:1024, height:768,  dpi:132 },
+
+  { name: 'Samsung SWD-M100', width:480, height:800, dpi:217},
+  { name: 'Samsung Epic (D700)', width:480, height:800, dpi:233},
+  { name: 'Samsung Focus S', width:480, height:800, dpi:233},
+  { name: 'Samsung Jet (S8000)', width:480, height:800, dpi:300},
+  { name: 'Samsung Wave (S8500)', width:480, height:800, dpi:282},
+  { name: 'Samsung Nexus S SAMOLED', width:480, height:800, dpi:235},
+  { name: 'Samsung Nexus S LCD', width:480, height:800, dpi:235},
+  { name: 'Samsung Galaxy W (I8150)', width:480, height:800, dpi:252},
+  { name: 'Samsung Galaxy S (I9000)', width:480, height:800, dpi:233},
+  { name: 'Samsung Galaxy SII (I9100)', width:480, height:800, dpi:219},
+  { name: 'Samsung Galaxy SIII', width:720, height:1280, dpi:306},
+  { name: 'Samsung Galaxy Nexus', width:720, height:1280, dpi:316},
+  { name: 'Samsung Galaxy Tab', width:600, height:1024, dpi:171},
+  { name: 'Samsung Galaxy Tab 10.1', width:800, height:1280, dpi:149},
+  { name: 'Samsung Galaxy Note', width:800, height:1280, dpi:285},
+  { name: 'Samsung Galaxy Ace', width:320, height:480, dpi:164},
+  { name: 'Samsung Galaxy Gio (GT-S5660)', width:320, height:480, dpi:180},
+
+  { name:'Amazon Kindle', width:600, height:800, dpi:167 },
+
+  { name: 'HTC Wildfire', width:240, height:320, dpi:125},
+  { name: 'HTC Salsa', width:320, height:480, dpi:170},
+  { name: 'HTC Tattoo', width:240, height:320, dpi:143},
+  { name: 'HTC Aria', width:320, height:480, dpi:181},
+  { name: 'HTC Evo', width:480, height:800, dpi:217},
+  { name: 'HTC ChaCha', width:320, height:480, dpi:222},
+  { name: 'HTC Rezound', width:720, height:1280, dpi:342},
+  { name: 'HTC Desire HD', width:480, height:800, dpi:217},
+  { name: 'HTC Touch HD', width:480, height:800, dpi:245},
+  { name: 'HTC Droid Incredible', width:480, height:800, dpi:252},
+  { name: 'HTC Sensation', width:960, height:540, dpi:256},
+  { name: 'HTC Touch Pro2', width:480, height:800, dpi:259},
+  { name: 'HTC Touch Diamond', width:480, height:640, dpi:286},
+  { name: 'HTC Touch Diamond2', width:480, height:800, dpi:292},
+
+  { name: 'LG Optimus 2X', width:480, height:800, dpi:233},
+  { name: 'LG Optimus LTE', width:720, height:1280, dpi:329},
+  { name: 'LU1400', width:480, height:800, dpi:333},
+  { name: 'LG Optimus 3D', width:400, height:800, dpi:217},
+
+  { name: 'Nokia N80', width:352, height:416, dpi:256},
+  { name: 'Nokia 770, N800, N810', width:800, height:480, dpi:225},
+  { name: 'Nokia 6300', width:240, height:320, dpi:196},
+  { name: 'Nokia N95, N85', width:240, height:320, dpi:153},
+  { name: 'Nokia N92, N95 8GB, N96', width:240, height:320, dpi:143},
+  { name: 'Nokia N70', width:176, height:208, dpi:130},
+  { name: 'Nokia E51', width:240, height:320, dpi:200},
+  { name: 'Nokia E6', width:640, height:480, dpi:328},
+  { name: 'Nokia E70, N90', width:352, height:416, dpi:259},
+  { name: 'Nokia E71', width:240, height:320, dpi:169},
+  { name: 'Nokia 5800, X6', width:640, height:360, dpi:231},
+  { name: 'Nokia N97, N8, C7-00', width:640, height:360, dpi:209},
+  { name: 'Nokia N900', width:800, height:480, dpi:267},
+  { name: 'Nokia C5-03, C6-01', width:640, height:360, dpi:229},
+  { name: 'Nokia C3 Touch and Type', width:320, height:240, dpi:167},
+  { name: 'Nokia E7-00, X7', width:640, height:360, dpi:184},
+  { name: 'Nokia Lumia 710', width:800, height:480, dpi:252},
+  { name: 'Nokia Lumia 800', width:800, height:480, dpi:252},
+  { name: 'Nokia Lumia 900', width:800, height:480, dpi:217},
+
+  { name: 'Neo FreeRunner', width:480, height:640, dpi:282},
+  { name: 'Pandora', width:800, height:480, dpi:217},
+  { name: 'Palm Pre / Pre 2', width:480, height:320, dpi:186},
+];
+
+function drawScreen(container, s, mydpi, url) {
+  var heading = document.createElement('h1');
+  var text = s.name + ': ' + s.width + '×' + s.height + ' @ ' + s.dpi + 'dpi';
+  heading.appendChild(document.createTextNode(text));
+  container.appendChild(heading);
+
+  var border = document.createElement('div');
+  border.className = 'border';
+  border.style.width = (s.width / s.dpi * mydpi) + 'px';
+  border.style.height = (s.height / s.dpi * mydpi) + 'px';
+
+  var frame = document.createElement('iframe');
+  frame.src = url;
+  frame.width = s.width;
+  frame.height = s.height;
+  frame.style.MozTransformOrigin = "top left"
+  frame.style.MozTransform = "scale(" + mydpi/s.dpi + ")";
+
+  border.appendChild(frame);
+  container.appendChild(border);
+}
+
+function $(id) { return document.getElementById(id); }
+
+function drawScreens() {
+  var mydpi = parseInt($('mydpi').value);
+  if (!mydpi) {
+    mydpi = 113; // My macbook default
+    $('mydpi').value = mydpi;
+  }
+
+  var url = $('url').value;
+
+  var container = $('screens');
+  container.innerHTML = '';
+  for(var i = 0; i < screenData.length; i++) {
+    drawScreen(container, screenData[i], mydpi, url);
+  }
+}
+
+window.onload = drawScreens;
+</script>
+</head>
+<body>
+<h1>Simulated Mobile Device Screens</h1>
+<p>
+(Screen resolution and pixel density from
+<a href="http://en.wikipedia.org/wiki/List_of_displays_by_pixel_density">
+Wikipedia</a>.)
+
+<p>
+Display resolution (dpi) of this screen: 
+<!-- 13" MacBook Pro is 113 dpi -->
+<input id="mydpi" onchange="drawScreens()" value="113">
+<p>
+URL to display on simulated screens:
+<input id="url" onchange="drawScreens()" value="testpattern.html">
+<div id="screens"></div>
+</body>

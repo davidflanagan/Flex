@@ -1,0 +1,17 @@
+screen.html uses data from
+http://en.wikipedia.org/wiki/List_of_displays_by_pixel_density 
+to simulate mobile device screens.  
+
+For each screen, it creates an iframe with the specified width and
+height and then uses -moz-transform (it is Firefox-specific, for now)
+to scale that iframe to simulate the pixel density of the mobile
+screen.
+
+There is an input field for entring the pixel density of the screen
+you're running on. It defaults to 113 dpi, which is the density of
+the 13" MacBook Pro.
+
+There is also an input field for specifying what URL to display on the
+simulated screens.  It defaults to testpattern.html which is an
+attempt at a flexible layout based on media queries and the CSS rem
+unit.

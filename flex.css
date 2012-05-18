@@ -1,0 +1,211 @@
+/* default values */
+html {
+    font-size: 3px;
+}
+#_about:after {
+  content: "default";
+}
+
+/*
+ * Set the basic rem unit based on pixel density.
+ * If a more specific screen size match is found below
+ * then we'll use that instead
+ */
+
+/*
+ * These media queries don't work when simulating a device in a browser
+ * because we just get whatever the browser's resolution is
+ *
+
+@media (max-resolution: 140dpi) {
+   html {
+     font-size: 3px;
+   }
+
+   #_about:after {
+      content: "<140dpi";
+   }
+}
+
+@media (min-resolution: 140dpi) and (max-resolution: 200dpi) {
+   html {
+     font-size: 4px;
+   }
+
+   #_about:after {
+      content: ">140dpi <200dpi";
+   }
+}
+
+@media (min-resolution: 200dpi) and (max-resolution: 280dpi) {
+   html {
+     font-size: 6px;
+   }
+
+   #_about:after {
+      content: ">200dpi <280dpi";
+   }
+}
+
+@media (min-resolution: 280dpi) {
+   html {
+     font-size: 8px;
+   }
+
+   #_about:after {
+      content: ">280dpi";
+   }
+}
+*/
+
+
+@media (orientation: portrait) and (max-width: 300px), 
+       (orientation: landscape) and (max-width: 400px)
+{
+   html {
+     font-size: 3px;
+   }
+
+   #_about:after {
+      content: "approx QVGA";
+   }
+}
+
+@media (orientation: portrait) and (min-width: 300px) and (max-width:420px),
+       (orientation: landscape) and (min-width: 400px) and (max-width:600px)
+{
+   html {
+     font-size: 4px;
+   }
+
+   #_about:after {
+      content: "approx HVGA";
+   }
+}
+
+@media (orientation: portrait) and (min-width: 420px) and (max-width:640px),
+       (orientation: landscape) and (min-width: 600px) and (max-width:960px)
+{
+   html {
+     font-size: 6px;
+   }
+
+   #_about:after {
+      content: "approx WVGA";
+   }
+}
+
+@media (orientation: portrait) and (min-width: 640px),
+       (orientation: landscape) and (min-width: 960px)
+{
+   html {
+     font-size: 4px;
+   }
+
+   #_about:after {
+      content: "tablet";
+   }
+}
+
+
+
+/* Set the basic rem unit based on screen size */
+ 
+/*
+ Can we change the "all" to "handheld" below?
+ Or will that break in the b2g desktop client?
+*/
+
+/*
+ * QVGA device in portrait or landscape.
+ * Scale factor 0.75
+ * Typical resolution: 120dpi
+ * At 120dpi, 1 rem = .025in, 1.8pt, .635mm
+ *   40rem = 1in
+ *   15.75rem = 1cm so a 16rem square is a good-size touch area
+ */
+@media all and (orientation: portrait) and (width: 240px), 
+       all and (orientation: landscape) and (width: 320px)
+{
+   html {
+     font-size: 3px;
+   }
+
+   #_about:after {
+      content: "QVGA";
+   }
+}
+
+
+/*
+ * HVGA device in portrait or landscape.
+ * Or DVGA device in portrait or landscape with 1 CSS pixel == 2 device pixels
+ * Scale factor 1.0
+ * Typical resolution: 160dpi
+ * At 160dpi, 1 rem = .025in, 1.8pt, .635mm
+ */
+@media
+  all                   
+    and (orientation: portrait)
+    and (width: 320px), 
+  all
+    and (orientation: landscape)
+    and (width: 480px),
+  all
+    and (orientation: portrait)
+    and (width: 640px)
+    and (-moz-device-pixel-ratio: 2), 
+  all
+    and (orientation: landscape)
+    and (width: 960px)
+    and (-moz-device-pixel-ratio: 2)
+{
+   html {
+     font-size: 4px;
+   }
+   #_about:after {
+      content: "HVGA";
+   }
+}
+
+/*
+ * WVGA device in portrait or landscape
+ * Scale factor 1.5
+ * Typical resolution: 240dpi
+ * At 240dpi, 1 rem = .025in, 1.8pt, .635mm
+ */
+@media all and (orientation: portrait) and (width: 480px), 
+       all and (orientation: landscape) and (width: 800px)
+{
+   html {
+     font-size: 6px;
+   }
+   #_about:after {
+      content: "WVGA";
+   }
+}
+
+/*
+ * DVGA device in portrait or landscape
+ * with one CSS pixel == 1 device pixel
+ * Scale factor: 2.0
+ * Typical resolution: 320dpi
+ * At 320dpi, 1 rem = .025in, 1.8pt, .635mm
+ */
+@media
+  all
+    and (orientation: portrait)
+    and (width: 640px)
+    and (-moz-device-pixel-ratio: 1), 
+  all
+    and (orientation: landscape)
+    and (width: 960px)
+    and (-moz-device-pixel-ratio: 1)
+{
+   html {
+     font-size: 8px;
+   }
+   #_about:after {
+      content: "DVGA";
+   }
+}
