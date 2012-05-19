@@ -24,12 +24,9 @@ var screenData = [
   { name: 'Apple iPad', width:1024, height:768,  dpi:132 },
 
   { name: 'Samsung SWD-M100', width:480, height:800, dpi:217},
-  { name: 'Samsung Epic (D700)', width:480, height:800, dpi:233},
-  { name: 'Samsung Focus S', width:480, height:800, dpi:233},
   { name: 'Samsung Jet (S8000)', width:480, height:800, dpi:300},
   { name: 'Samsung Wave (S8500)', width:480, height:800, dpi:282},
-  { name: 'Samsung Nexus S SAMOLED', width:480, height:800, dpi:235},
-  { name: 'Samsung Nexus S LCD', width:480, height:800, dpi:235},
+  { name: 'Samsung Nexus S', width:480, height:800, dpi:235},
   { name: 'Samsung Galaxy W (I8150)', width:480, height:800, dpi:252},
   { name: 'Samsung Galaxy S (I9000)', width:480, height:800, dpi:233},
   { name: 'Samsung Galaxy SII (I9100)', width:480, height:800, dpi:219},
@@ -44,19 +41,19 @@ var screenData = [
   { name:'Amazon Kindle', width:600, height:800, dpi:167 },
 
   { name: 'HTC Wildfire', width:240, height:320, dpi:125},
-  { name: 'HTC Salsa', width:320, height:480, dpi:170},
   { name: 'HTC Tattoo', width:240, height:320, dpi:143},
+  { name: 'HTC Salsa', width:320, height:480, dpi:170},
   { name: 'HTC Aria', width:320, height:480, dpi:181},
-  { name: 'HTC Evo', width:480, height:800, dpi:217},
   { name: 'HTC ChaCha', width:320, height:480, dpi:222},
-  { name: 'HTC Rezound', width:720, height:1280, dpi:342},
+  { name: 'HTC Evo', width:480, height:800, dpi:217},
   { name: 'HTC Desire HD', width:480, height:800, dpi:217},
   { name: 'HTC Touch HD', width:480, height:800, dpi:245},
   { name: 'HTC Droid Incredible', width:480, height:800, dpi:252},
-  { name: 'HTC Sensation', width:960, height:540, dpi:256},
   { name: 'HTC Touch Pro2', width:480, height:800, dpi:259},
   { name: 'HTC Touch Diamond', width:480, height:640, dpi:286},
   { name: 'HTC Touch Diamond2', width:480, height:800, dpi:292},
+  { name: 'HTC Sensation', width:960, height:540, dpi:256},
+  { name: 'HTC Rezound', width:720, height:1280, dpi:342},
 
   { name: 'LG Optimus 2X', width:480, height:800, dpi:233},
   { name: 'LG Optimus LTE', width:720, height:1280, dpi:329},
@@ -79,7 +76,6 @@ var screenData = [
   { name: 'Nokia C5-03, C6-01', width:640, height:360, dpi:229},
   { name: 'Nokia C3 Touch and Type', width:320, height:240, dpi:167},
   { name: 'Nokia E7-00, X7', width:640, height:360, dpi:184},
-  { name: 'Nokia Lumia 710', width:800, height:480, dpi:252},
   { name: 'Nokia Lumia 800', width:800, height:480, dpi:252},
   { name: 'Nokia Lumia 900', width:800, height:480, dpi:217},
 
@@ -132,14 +128,55 @@ window.onload = drawScreens;
 </script>
 </head>
 <body>
-<h1>Simulated Mobile Device Screens</h1>
-<p>
-(Screen resolution and pixel density from
-<a href="http://en.wikipedia.org/wiki/List_of_displays_by_pixel_density">
-Wikipedia</a>.)
+<div style="float:right; width: 40%; margin:10px;">
 
 <p>
-Display resolution (dpi) of this screen: 
+This page simulates the the resolution and pixel density of various
+mobile devices, using data from 
+<a href="http://en.wikipedia.org/wiki/List_of_displays_by_pixel_density">
+Wikipedia</a>. It is intended for testing HTML/CSS designs on 
+lots of different screens.
+
+<p>
+If you want the screens to appear at the right physical size on your
+screen, it is important that you enter the pixel density of the screen
+that you are viewing this page on to the left.  The default value is
+113 dots per inch, which (according to the Wikipedia page linked
+above) is the value for a 13 inch MacBook Pro.
+
+<p>
+The second text field on the left is where you enter the URL of the
+page you want to display on each of the simulated screens.  The
+default is a test page that I'm working on, using CSS media queries
+and the CSS rem unit. Instead of setting that field, you can also
+clone the <a href="https://github.com/davidflanagan/Flex">git repo</a>
+and then try out your own layouts offline.
+
+<p>
+Each of the simulated screens is an &lt;iframe&gt; with its width and
+height set to the number of pixels on the device screen.  To make the
+screen appear at its actual physical size, I use a CSS transform
+attribute to scale it down.  (I'm using -moz-transform right now, so
+this is Firefox only at the moment.) If your page includes bitmapped
+images, this transformation step will down-sample them, so they might
+not appear crisp on these simulated screens.
+
+<p>
+Finally one <b>major caveat</b>: the pages loaded into the simulated
+screens do not know that they're going to be rescaled, and they think
+they've got the same pixel density as the rest of your web page. That
+means that CSS media queries using resolution, max-resolution and
+min-resolution will not work the way you want them too. (<i>If you can
+think of a way to work around this, please let me know</i>.)
+
+
+</div>
+
+<h1>Simulated Mobile Device Screens</h1>
+<p>
+
+<p>
+Pixel density (dpi) of this screen: 
 <!-- 13" MacBook Pro is 113 dpi -->
 <input id="mydpi" onchange="drawScreens()" value="113">
 <p>
