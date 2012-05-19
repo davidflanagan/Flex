@@ -84,7 +84,7 @@ var screenData = [
   { name: 'Palm Pre / Pre 2', width:480, height:320, dpi:186},
 ];
 
-function drawScreen(container, s, mydpi, url) {
+function drawScreen(container, s, mydpi, url, doscale) {
   var heading = document.createElement('h1');
   var text = s.name + ': ' + s.width + '×' + s.height + ' @ ' + s.dpi + 'dpi';
   heading.appendChild(document.createTextNode(text));
@@ -92,15 +92,23 @@ function drawScreen(container, s, mydpi, url) {
 
   var border = document.createElement('div');
   border.className = 'border';
-  border.style.width = (s.width / s.dpi * mydpi) + 'px';
-  border.style.height = (s.height / s.dpi * mydpi) + 'px';
+  if (doscale) {
+    border.style.width = (s.width / s.dpi * mydpi) + 'px';
+    border.style.height = (s.height / s.dpi * mydpi) + 'px';
+  }
+  else {
+    border.style.width = s.width + 'px';
+    border.style.height = s.height + 'px';
+  }
 
   var frame = document.createElement('iframe');
   frame.src = url;
   frame.width = s.width;
   frame.height = s.height;
-  frame.style.MozTransformOrigin = "top left"
-  frame.style.MozTransform = "scale(" + mydpi/s.dpi + ")";
+  if (doscale) {
+    frame.style.MozTransformOrigin = "top left"
+    frame.style.MozTransform = "scale(" + mydpi/s.dpi + ")";
+  }
 
   border.appendChild(frame);
   container.appendChild(border);
@@ -117,10 +125,12 @@ function drawScreens() {
 
   var url = $('url').value;
 
+  var doscale = $('doscale').checked;
+
   var container = $('screens');
   container.innerHTML = '';
   for(var i = 0; i < screenData.length; i++) {
-    drawScreen(container, screenData[i], mydpi, url);
+    drawScreen(container, screenData[i], mydpi, url, doscale);
   }
 }
 
@@ -182,5 +192,9 @@ Pixel density (dpi) of this screen:
 <p>
 URL to display on simulated screens:
 <input id="url" onchange="drawScreens()" value="testpattern.html">
+<p>
+Scale screens to physical size: 
+<input type=checkbox id="doscale" checked onchange="drawScreens()">
+(Uncheck to display pixels 1:1)
 <div id="screens"></div>
 </body>
